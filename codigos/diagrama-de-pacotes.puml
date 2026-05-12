@@ -1,11 +1,5 @@
 @startuml DiagramaDePacotes_Olimpiadas
 
-skinparam packageBackgroundColor #F0F4F8
-skinparam packageBorderColor #2C3E50
-skinparam classBorderColor #2C3E50
-skinparam arrowColor #2C3E50
-skinparam shadowing false
-
 package "GestaoOlimpiadas" {
 
   package "controller" {
@@ -43,12 +37,11 @@ package "GestaoOlimpiadas" {
     class InscricaoCompeticao
   }
 
-}
+  controller --> service    : <<access>>
+  service    --> repository : <<access>>
+  repository --> model      : <<import>>
+  service    --> model      : <<import>>
 
-' Fluxo de cima para baixo
-controller -down..> service    : <<access>>
-service    -down..> repository : <<access>>
-repository -down...> model      : <<import>>
-service    -down..> model      : <<import>>
+}
 
 @enduml

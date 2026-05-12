@@ -29,66 +29,81 @@ enum Modalidade {
 }
 
 class Local {
-  - idLocal    : Long
-  - nomeLocal  : String
-  - cidade     : String
-  - capacidade : Integer
+  +idLocal    : int
+  +nomeLocal  : String
+  +cidade     : String
+  +capacidade : int
+  +verificarDisponibilidade(data: Date, horario: Time): bool
 }
 
 class Competicao {
-  - idCompeticao : Long
-  - data         : LocalDate
-  - horario      : LocalTime
-  - status       : StatusCompeticao
-  - modalidade   : Modalidade
+  +idCompeticao : int
+  +data         : Date
+  +horario      : Time
+  +status       : StatusCompeticao
+  +modalidade   : Modalidade
+  +cadastrarCompeticao(): void
+  +cancelarCompeticao(): void
+  +getInformacoes(): String
 }
 
 class Atleta {
-  - idAtleta         : Long
-  - nome             : String
-  - numeroCredencial : String
-  - dataNascimento   : LocalDate
+  +idAtleta         : int
+  +nome             : String
+  +numeroCredencial : String
+  +dataNascimento   : Date
+  +inscreverEmCompeticao(Competicao): void
+  +getInformacoes(): String
 }
 
 class Pais {
-  - idPais   : Long
-  - nomePais : String
+  +idPais   : int
+  +nomePais : String
+  +totalOuro()   : int
+  +totalPrata()  : int
+  +totalBronze() : int
+  +gerarRelatorioMedalhas(): String
 }
 
 class Resultado {
-  - idResultado    : Long
-  - atletaOuro     : String
-  - atletaPrata    : String
-  - atletaBronze   : String
+  +idResultado  : int
+  +atletaOuro   : String
+  +atletaPrata  : String
+  +atletaBronze : String
+  +registrarResultado(): void
+  +getVencedor(): String
 }
 
 class Medalha {
-  - idMedalha   : Long
-  - dataEntrega : LocalDate
-  - tipo        : TipoMedalha
-  - modalidade  : Modalidade
+  +idMedalha   : int
+  +dataEntrega : Date
+  +tipo        : TipoMedalha
+  +modalidade  : Modalidade
+  +getDescricao(): String
 }
 
 class InscricaoCompeticao {
-  - dataInscricao   : LocalDate
-  - statusInscricao : String
+  +dataInscricao   : Date
+  +statusInscricao : String
+  +confirmarInscricao(): void
+  +cancelarInscricao(): void
 }
 
-' para relacionamento de composicao
-Local      "1"    *-- "0..*" Competicao : contém >
-Competicao "1"    *-- "0..1" Resultado  : gera >
-Pais       "1"    *-- "0..*" Medalha    : acumula >
+' COMPOSIÇÃO
+Local      "1"    *-- "0..*" Competicao : contém
+Competicao "1"    *-- "0..1" Resultado  : gera
+Pais       "1"    *-- "0..*" Medalha    : acumula
 
-' para relacionamento de agregacao
-Pais  "1"    o-- "1..*" Atleta     : representa >
-Resultado "1" o-- "3"  Atleta     : classifica >
+' AGREGAÇÃO
+Pais      "1" o-- "1..*" Atleta : representa
+Resultado "1" o-- "3"    Atleta : classifica
 
-' foi criada uma classe associativa pra repressentar melho
+' ASSOCIAÇÃO com classe associativa
 Atleta     "1..*" -- "1..*" Competicao
 InscricaoCompeticao . Atleta
 InscricaoCompeticao . Competicao
 
-' enums
+' ENUMS
 Competicao ..> StatusCompeticao : usa
 Competicao ..> Modalidade       : usa
 Medalha    ..> TipoMedalha      : usa
