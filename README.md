@@ -56,6 +56,8 @@ Com a chegada das Olimpíadas, o SGO é um sistema de gestão desenvolvido para 
 │   ├── diagrama-de-componentes.puml
 │   └── diagrama-de-implantação.puml
 ├── imagens/
+    ├── diagrama-de-caso-de-uso.png
+    ├── diagrama-de-componentes.png
 │   ├── DiagramaDeClasses_Olimpiadas.png
 │   ├── DiagramaDePacotes_Olimpiadas.png
 │   └── DiagramaDeImplantacao_Olimpiadas.png
@@ -67,3 +69,4 @@ Com a chegada das Olimpíadas, o SGO é um sistema de gestão desenvolvido para 
 ## 🛠️ Tecnologias Utilizadas
 
 - [PlantUML](https://plantuml.com/) — modelagem dos diagramas UML
+- [API  PlantUML](https://github.com/joaopauloaramuni/python/tree/main/PROJETOS/Projeto%20PlantUML%20API/plantuml_code) — APIs do PlantUML que foram usadas como base
